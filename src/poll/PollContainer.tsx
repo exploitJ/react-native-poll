@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Image, ListItem } from 'react-native-elements';
 import { ImageURISource, View } from 'react-native';
 import { FlatGrid, SectionGrid } from 'react-native-super-grid';
-import PollEntry from './PollEntry';
+import EntryList from './PollEntry/EntryList';
 
 enum PollType {
   SURVEY,
@@ -17,6 +17,7 @@ type SelectableData = {
 };
 
 type PollData = {
+  id: number | string;
   title: string;
   image?: ImageURISource | number;
   pollType?: PollType;
@@ -37,6 +38,7 @@ const PollContainer = ({ data }: PollConatinerProps) => {
       renderItem={({ item, index }) => (
         <Card title={item.title} image={item.image}>
           <FlatGrid
+            listKey={index.toString()}
             items={item.option}
             renderItem={({ item, index }) => (
               <ListItem key={item.idx} title={item.description} bottomDivider />
